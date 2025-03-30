@@ -1,20 +1,20 @@
-import {
+// posts.js
+const {
   pgTable,
   serial,
   text,
   integer,
   timestamp,
-  foreignKey,
-} from "drizzle-orm/pg-core";
+} = require("drizzle-orm/pg-core");
 
-export const posts = pgTable("posts", {
+const posts = pgTable("posts", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const comments = pgTable("comments", {
+const comments = pgTable("comments", {
   id: serial("id").primaryKey(),
   postId: integer("post_id")
     .notNull()
@@ -22,3 +22,5 @@ export const comments = pgTable("comments", {
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+module.exports = { posts, comments };

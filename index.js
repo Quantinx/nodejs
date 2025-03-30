@@ -1,6 +1,7 @@
 const express = require("express");
 const server = express();
 require("dotenv").config();
+server.use(express.json());
 
 const PORT = 9000;
 
@@ -14,7 +15,6 @@ const config = {
   clientID: process.env.AUTH_CLIENTID,
   issuerBaseURL: process.env.AUTH_ISSUERURL,
 };
-
 server.use(auth(config));
 
 const postRouter = require("./routes/posts");
